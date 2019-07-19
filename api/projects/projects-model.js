@@ -13,8 +13,13 @@ function getProjectById(id) {
     .then(project => {
       if (project) {
         return getActions(id).then(action => {
-          project.actions = action;
-          return project;
+          project.actions = action.map(el => {
+            return { ...el, completed: el.completed === 0 ? false : true };
+          });
+          return {
+            ...project,
+            completed: action.completed === 1 ? true : false
+          };
         });
       } else {
         return null;
