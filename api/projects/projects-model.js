@@ -10,8 +10,15 @@ function getProjectById(id) {
   return projectsDb("projects")
     .where("id", id)
     .first()
-    .then(() => {
-      return getActions(id);
+    .then(project => {
+      if (project) {
+        return getActions(id).then(action => {
+          project.actions = action;
+          return project;
+        });
+      } else {
+        return null;
+      }
     });
 }
 

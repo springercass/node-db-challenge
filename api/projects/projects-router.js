@@ -3,9 +3,13 @@ const express = require("express");
 const router = express.Router();
 
 const projectsDb = require("./projects-model");
-const { validateProject, validateAction } = require("../middleware");
+const {
+  validateProject,
+  validateAction,
+  validateProjectID
+} = require("../middleware");
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", validateProjectID, async (req, res) => {
   try {
     const project = await projectsDb.getProjectById(req.params.id);
     res.status(200).json(project);
@@ -26,7 +30,7 @@ router.post("/", validateProject, async (req, res) => {
   }
 });
 
-router.post("/actions", validateAction, async (req, res) => {
+router.post("/actions", validateAction, validateProjectID, async (req, res) => {
   try {
     const action = await projectsDb.addAction(req.body);
     console.log(action);

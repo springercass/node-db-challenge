@@ -8,20 +8,17 @@ exports.seed = function(knex) {
         {
           name: "Project 1",
           description: "This is the first project.",
-          completed: false,
-          actions: [1, 2]
+          completed: false
         },
         {
           name: "Project 2",
           description: "This is the second project.",
-          completed: false,
-          actions: [3, 4]
+          completed: false
         },
         {
           name: "Project 3",
           description: "This is the third project.",
-          completed: false,
-          actions: [5, 6]
+          completed: false
         }
       ]);
     });
